@@ -3,8 +3,23 @@ import { Input, Button, Form} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Block from '../Block/Block';
 import { Link } from 'react-router-dom';
+import formikEnhancer from '../Hoc-helpers/withFormik';
 
-const LoginForm = () => {
+
+const LoginForm = (props) => {
+
+    const {
+        values,
+        touched,
+        errors,
+        dirty,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isValid
+      } = props;
+
     return (
         <section className = "auth">
             <h2 className = 'auth__title'>Войти в аккаунт</h2>
@@ -12,39 +27,33 @@ const LoginForm = () => {
             <Block>
             <Form
                 name="normal_login"
-                initialValues={{
-                    remember: true,
-                }}
                 >
                 <Form.Item
-                    name="username"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Please input your Username!',
-                    },
-                    ]}
+                    hasFeedback
+                    validateStatus = {!touched.userName ? '' : errors.userName ? 'error' : 'success'}
                 >
                     <Input 
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="Введите логин"
                     size= 'large'
+                    name = 'userName'
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    value = {values.userName}
                     />
                 </Form.Item>
                 <Form.Item
-                    name="password"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Please input your Password!',
-                    },
-                    ]}
+                    hasFeedback
+                    validateStatus = {!touched.password ? '' : errors.password ? 'error' : 'success'}
                 >
                     <Input
                     prefix={<LockOutlined className="site-form-item-icon" />}
                     type="password"
                     placeholder="Введите пароль"
                     size= 'large'
+                    onBlur = {handleBlur}
+                    onChange = {handleChange}
+                    name = 'password'
                     />
                 </Form.Item>
                 <Form.Item>
@@ -59,4 +68,4 @@ const LoginForm = () => {
     );
 }
 
-export default LoginForm;
+export default formikEnhancer(LoginForm);

@@ -12,7 +12,7 @@ const Auth = () => {
     return (
         <div className = 'auth__wrap'>
             <Route path = '/' component={LoginForm} exact/>
-            <Route path = '/register' component={RegisterForm} exact/>
+            <Route path = '/register' component={RegisterForm}/>
         </div>
     );
 }

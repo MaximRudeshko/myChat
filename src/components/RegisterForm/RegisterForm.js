@@ -1,96 +1,103 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input, Button, Form} from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
 import {Link} from 'react-router-dom'
 import Block from '../Block/Block'
+import { SuccessBlock } from '../SuccesBlock';
+import formikEnhancer from '../Hoc-helpers/withFormik';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+    const {
+        values,
+        touched,
+        errors,
+        dirty,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isValid
+      } = props;     
+
+    const [success, setSuccess] = useState(false)
+    console.log(touched, errors.userName)
     return (
         <section className = "auth">
             <h2 className = 'auth__title'>Регистрация</h2>
             <p className = 'auth__subtitle'>Для входа в чат, вам нужно зарегистрироваться</p>
             <Block>
-            <Form
+            {!success ?
+                <Form
                 name="normal_login"
-                initialValues={{
-                    remember: true,
-                }}
+                
                 >
                 <Form.Item
-                    name="email"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Please input your email',
-                    },
-                    ]}
+                    validateStatus = {!touched.email ? "" :  errors.email ? 'error' : 'success'}
+                    hasFeedback
                 >
                     <Input 
                     prefix={<MailOutlined className="site-form-item-icon" />}
                     placeholder="Введите вашу почту"
-                    size= 'large'
+                    size= 'large' 
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    name="email" 
+                    value = {values.email}
                     />
                 </Form.Item>
                 <Form.Item
-                    name="username"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Please input your login!',
-                    },
-                    ]}
+                    validateStatus = {!touched.userName ? "" :  errors.userName ? 'error' : 'success'}
+                    hasFeedback
                 >
                     <Input
                     prefix={<UserOutlined className="site-form-item-icon" />}
-                    type="text"
                     placeholder="Введите ваш логин"
                     size= 'large'
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    name="userName"
                     />
                 </Form.Item>
                 <Form.Item
-                    name="password-repit"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                    ]}
+                    validateStatus = {!touched.password ? '' : errors.password ? 'error' : 'success'}
+                    hasFeedback
                 >
                     <Input
                     prefix={<LockOutlined className="site-form-item-icon" />}
                     type="password"
                     placeholder="Введите пароль"
                     size= 'large'
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    name = 'password'
                     />
                 </Form.Item>
                 <Form.Item
-                    name="password"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                    ]}
+                    validateStatus = {!touched.confirmPassword ? '' : errors.confirmPassword ? 'error' : 'success'}
+                    hasFeedback
                 >
                     <Input
                     prefix={<LockOutlined className="site-form-item-icon" />}
                     type="password"
                     placeholder="Повторите пароль"
                     size= 'large'
+                    name = 'confirmPassword'
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button size = 'large' type="primary" htmlType="submit" className="login-form-button">
+                    <Button disabled={!(isValid && dirty)} size = 'large' type="primary" htmlType="submit" className="login-form-button" onClick = {() => setSuccess(false)}>
                         Зарегистрироваться
                     </Button>                   
                 </Form.Item>
                     <span><Link to = '/' className = 'auth__reg'>Войти в учетную запись</Link></span>
-                </Form>
+                </Form>: <SuccessBlock/>
+            }
             </Block>
-            
         </section>
     );
 }
 
-export default RegisterForm;
+export default formikEnhancer(RegisterForm);
 
