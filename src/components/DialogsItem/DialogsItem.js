@@ -7,14 +7,15 @@ import Date from '../Date/Date'
 import {ReadedIndicator} from '../ReadedIndicator'
 
 import './DialogsItem.scss'
+import Avatar from '../Avatar';
 
-const DialogsItem = ({userName, avatar,date, messageText, counter, isMe, isOnline}) => {
+const DialogsItem = ({id, userName, avatar,date, messageText, counter, isMe, isOnline}) => {
     return (
         <li className = {classNames('dialogs__item', {
             'dialogs__item--online' : isOnline
         })}>
             <div className = 'dialogs__item-avatar'>
-                <img src = {avatar} alt = {`${userName} avatar`}/>
+                <Avatar id ={id} userName = {userName} avatar = {avatar}/>
             </div>
             <div className = 'dialogs__item-info'>
                 <div className = 'dialogs__item-info-top'>
