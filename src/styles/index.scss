@@ -1,5 +1,11 @@
 @import '~antd/dist/antd.css';
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
 
 
 
@@ -7,7 +13,12 @@ html,
 body,
 #root,
 .App,
-.auth__wrap{
-    height: 100%;
+.auth__wrap,
+.home{
+    height: 100vh;
     font-family: 'Roboto' sans-serif;
 }
+
+@import '../components/DialogsItem/DialogsItem.scss'
+
+

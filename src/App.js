@@ -7,8 +7,8 @@ import Home from './components/Pages/home/Home'
 function App() {
   return (
     <div className="App">
-        <Auth/>
-        <Route path = '/home' component = {Home}/>
+        <Route exact path={["/", "/login", "/register"]} component={Auth} />
+        <Route exact path="/home" component={Home} />
     </div>
   );
 }

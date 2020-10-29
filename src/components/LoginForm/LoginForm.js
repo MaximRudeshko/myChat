@@ -44,21 +44,19 @@ const LoginForm = (props) => {
                 </Form.Item>
                 <Form.Item
                     hasFeedback
-                    validateStatus = {!touched.password ? '' : errors.password ? 'error' : 'success'}
                 >
                     <Input
                     prefix={<LockOutlined className="site-form-item-icon" />}
                     type="password"
                     placeholder="Введите пароль"
                     size= 'large'
-                    onBlur = {handleBlur}
-                    onChange = {handleChange}
+                    
                     name = 'password'
                     />
                 </Form.Item>
                 <Form.Item>
                     <Button size = 'large' type="primary" htmlType="submit" className="login-form-button">
-                        Войти 
+                    <Link to = '/home'>Войти в аккаунт</Link>
                     </Button>                   
                 </Form.Item>
                 <span><Link to = '/register' className = 'auth__reg'>Зарегистрироваться</Link></span>

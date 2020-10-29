@@ -1,5 +1,8 @@
+@import '../../styles/variables';
+
 .message{
     margin-bottom: 10px;
+    $self: &;
     &__wrapper{
         display: flex;
         max-width: 80%;
@@ -7,6 +10,10 @@
     &__content{
         display: flex;
         flex-direction: column;
+    }
+
+    &__top{
+        display: flex;
     }
     &__avatar{
         display: flex;
@@ -21,7 +28,7 @@
     }
     &__bubble{
         padding: 13px 18px 14px 17px;
-        background: #3674FF;
+        background:$blue;
         border-radius:12px 12px 12px 0px;
         box-shadow: 0px 5px 5px 0px rgba(54, 116, 255, 0.3);
         align-self: baseline;
@@ -57,27 +64,140 @@
                 border-radius:12px;
             }
         }
+    }  
+    
+    &--typing{
+        span {
+            height: 10px;
+            width: 10px;
+            float: left;
+            margin: 0 1px;
+            background-color: #fff;
+            display: block;
+            border-radius: 50%;
+            opacity: 0.4;
+            @for $i from 1 through 3 {
+              &:nth-of-type(#{$i}) {
+                animation: 1s blink infinite ($i * .3333s);
+              }
+            }
+          }
+          @keyframes blink {
+            50% {
+              opacity: 1;
+            }
+          }
+    }
+
+    &--isme{
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row-reverse;
+        #{$self}__wrapper{
+                flex-direction: row-reverse;
+        }
+
+        #{$self}__top{
+                align-items: flex-end;
+                flex-direction: row-reverse; 
+                & > img{
+                    margin-right:10px; 
+                }
+                
+        }
+
+        
+        #{$self}__date{
+            text-align: right;
+        }
+        #{$self}__bubble{
+            border-radius:12px 12px 0px 12px;
+            background: #fff;
+            align-self: flex-end;
+            span{
+                color:#202020
+            }
+        }
+        #{$self}__typing{
+            span{
+                background-color:$blue;
+            }
+        }
+    }
+
+    &--audio{
+        #{$self}__bubble{
+            width: 280px;
+            position: relative;
+        }
+        #{$self}__audio{
+            
+            &-info{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                
+            }
+            &-btn{
+                button {
+                    cursor: pointer;
+                    border: 0;
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 30px;
+                    background: #3674FF;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                      height: 13px;
+                    }
+                }
+            }
+            &-duration{
+                font-size: 12px;
+                font-weight: 500;
+                opacity: .4;
+            }
+            &-progress {
+                left: 0;
+                top: 0;
+                position: absolute;
+                background-color: #b7d5ff;
+                height: 100%;
+                transition: all .3s linear;
+              }
+        }
     }
 }
 
-.message__isme{
-   margin-bottom: 10px;
-   display: flex;
-   flex-direction: row-reverse;
-   .message__wrapper{
-       flex-direction: row-reverse;
-       & > img{
-        margin-right:10px;
+.message--image{
+    .message__bubble{
+        padding: 0;
+        background:#fff;
+        border-radius:12px;
+        box-shadow: 0px 5px 5px 0px rgba(54, 116, 255, 0.3);
+        align-self: baseline;
     }
-   }
-   .message__date{
-    text-align: right;
-   }
-   .message__bubble{
-    border-radius:12px 12px 0px 12px;
-    background: #fff;
-        span{
-            color:#202020
+    .message__attachments{
+        li{
+            img{
+                width: 150px;
+                height: 150px;
+                border-radius:12px;
+            }
         }
-    }   
+    }
+}
+
+.message--typing{
+    .message__wrapper{
+        align-items:baseline;
+        .message__avatar{
+            img{
+                margin-bottom: 0;
+            }  
+        }
+    }
 }

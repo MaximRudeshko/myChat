@@ -1,0 +1,92 @@
+@import '../../styles/variables';
+.dialogs__item{
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    $item: &;
+    &-avatar{
+        display: flex;
+        margin-right: 10px;
+        position: relative;
+        img{
+            height: 40px;
+            width: 40px;
+            border-radius:50%;
+        }
+    }
+
+    &--online{
+        .dialogs__item-avatar{
+            &::after{
+                content: '';
+                position: absolute;
+                bottom:0;
+                right:0;
+                background:$green;
+                display: block;
+                height: 14px;
+                width: 14px;
+                border-radius:50%;
+                border: 3px solid #fff;
+            }
+        }
+    }
+
+    &-info{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        &-top{
+            display: flex;
+            justify-content: space-between;
+            b{
+                text-overflow: ellipsis;
+                width: auto; 
+                flex-basis: auto;
+                white-space: nowrap;
+                width: 155px;
+                flex: 1 1 auto;
+                overflow: hidden;
+            }
+            span{
+                color: #202020;
+                opacity: .4;  
+                font-size: 10px;
+            }
+        }
+        &-bottom{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            p{
+                margin: 0;
+                opacity:.7;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 245px;
+            }
+            &-count{
+                
+                span{
+                    height: 18px;
+                    width: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    letter-spacing: -2px;
+                    color:#fff;
+                    font-weight: 700;
+                    line-height: 13px;
+                    background: #f46b6b;
+                    font-size: 11px;
+                    border-radius:50%;
+                }
+                .message__indicator{
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

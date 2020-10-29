@@ -11,8 +11,8 @@ import './auth.scss'
 const Auth = () => {
     return (
         <div className = 'auth__wrap'>
-            <Route path = '/' component={LoginForm} exact/>
-            <Route path = '/register' component={RegisterForm}/>
+            <Route exact path={["/", "/login"]} component={LoginForm} />
+            <Route exact path="/register" component={RegisterForm} />
         </div>
     );
 }

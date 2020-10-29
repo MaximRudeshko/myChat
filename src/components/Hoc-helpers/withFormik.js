@@ -19,7 +19,7 @@ const formikEnhancer = withFormik({
             .required(),
         password: Yup.string()
             .trim()
-            .matches(/^[A-Za-z0-9_-]*$/ , 'Is not in correct format')
+            .matches(/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}/ , 'Is not in correct format')
             .required(),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password')])
@@ -31,7 +31,7 @@ const formikEnhancer = withFormik({
         setSubmitting(false);
         }, 1000);
     },
-    displayName: 'RegisterForm', // helps with React DevTools
+    displayName: 'RegisterForm'
 });
 
 export default formikEnhancer

@@ -16,11 +16,10 @@ const RegisterForm = (props) => {
         handleChange,
         handleBlur,
         handleSubmit,
-        isValid
+        isValid,
       } = props;     
 
     const [success, setSuccess] = useState(false)
-    console.log(touched, errors.userName)
     return (
         <section className = "auth">
             <h2 className = 'auth__title'>Регистрация</h2>
@@ -29,7 +28,6 @@ const RegisterForm = (props) => {
             {!success ?
                 <Form
                 name="normal_login"
-                
                 >
                 <Form.Item
                     validateStatus = {!touched.email ? "" :  errors.email ? 'error' : 'success'}
@@ -48,6 +46,12 @@ const RegisterForm = (props) => {
                 <Form.Item
                     validateStatus = {!touched.userName ? "" :  errors.userName ? 'error' : 'success'}
                     hasFeedback
+                    rules={[
+                        {
+                          required: true,
+                          message: 'Please input your username!',
+                        },
+                    ]}
                 >
                     <Input
                     prefix={<UserOutlined className="site-form-item-icon" />}
@@ -87,7 +91,7 @@ const RegisterForm = (props) => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button disabled={!(isValid && dirty)} size = 'large' type="primary" htmlType="submit" className="login-form-button" onClick = {() => setSuccess(false)}>
+                    <Button onClick = {() => setSuccess(true)} disabled={!(isValid && dirty)} size = 'large' type="primary" htmlType="submit" className="login-form-button">
                         Зарегистрироваться
                     </Button>                   
                 </Form.Item>
