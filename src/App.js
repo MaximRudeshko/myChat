@@ -1,8 +1,14 @@
 import React from 'react';
-import Auth from './components/Pages/auth/Auth';
-import './styles/index.scss';
 import {Route} from 'react-router-dom'
-import Home from './components/Pages/home/Home'
+
+import Auth from './components/Pages/auth/Auth';
+import Home from './components/Pages/home/Home';
+import DialogsApi from './services/dialogsApi';
+
+import './styles/index.scss';
+
+const api = new DialogsApi()
+console.log(api.getDialogs().then(data => console.log(data)))
 
 function App() {
 

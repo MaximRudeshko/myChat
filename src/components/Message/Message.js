@@ -10,7 +10,6 @@ import Date from '../Date/Date';
 import play from '../../assets/img/play.svg'
 import pause from '../../assets/img/pause.svg'
 import wave from '../../assets/img/wave.svg'
-import test from '../../assets/test-audio/test.mp3'
 
 import './message.scss'
 import convertTime from '../../utils/convertTime';
