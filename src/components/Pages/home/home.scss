@@ -1,8 +1,100 @@
 .home{
-    display: flex;
-    &__messages{
+    background-color:#F4F7FD;
+    &__container{
+        display: flex;
+        width: 1143px;
+        margin:0 auto;
+        height: 100%;
+        background-color:#fff;
+    }
+    &__sidebar{
+        border-right: 1px solid #F7F7F7;
+        &-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 21px 17px 22px 17px;
+            & > div {
+                svg{
+                    margin-right: 7px;
+                }
+                span{
+                    font-size: 14px;
+                    color: #202020;
+                }
+            }
+            button{
+                border:none;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+            }
+        }
+        &-search{
+            padding: 0px 16px 20px 19px;
+            span{
+                background-color:#F7F8F9;
+                border:none;
+                border-radius:2px;
+                input{
+                    background-color:#F7F8F9;
+                    font-size: 14px;
+                }
+            }
+            
+        }
+    }
+    &__dialog{
         flex: 1 1 auto;
         height:100%;
-        overflow-y: scroll;
+        &-header{
+            position: sticky;
+            z-index: 10000;
+            top: 0;
+            background:#fff;
+            border-bottom: 1px solid #F7F7F7;
+            padding: 13px 0;
+            &-wrapper{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                button{
+                    border:none;
+                    position: absolute; 
+                    right:35px;
+                }
+            } 
+            &-userinfo{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                b{
+                    font-size: 14px;
+                }
+                span{
+                    color:#202020;
+                    opacity: .3;
+                    display: flex;
+                    align-items: center;
+                    line-height: 12px;
+                    &::before{
+                        content: '';
+                        display:block;
+                        width: 6px;
+                        height: 6px;
+                        border-radius:50px;
+                        background:#00C980;
+                        margin-right: 5px;
+                    }
+                } 
+            }
+        }
+        &-chat{
+            height:100%;
+        }
     }
 }

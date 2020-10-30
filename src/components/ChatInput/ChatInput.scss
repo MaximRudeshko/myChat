@@ -1,0 +1,29 @@
+.home__dialog-input{
+    padding: 13px 35px 13px;
+    svg{
+        cursor:pointer
+    }
+    span{
+        padding: 5px;
+    }
+    button{
+        border:none;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    input{
+        font-size: 14px;
+    }
+    &-actions{
+        width: 90px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    
+}

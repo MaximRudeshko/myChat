@@ -4,8 +4,8 @@ import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
 
-const Date = ({date}) => {
+const Daate = ({date}) => {    
     return isToday(date) ? format(date, "H:mm") : format(date, "dd.MM.yy")
 }
 
-export default Date;
+export default Daate;

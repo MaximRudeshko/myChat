@@ -2,8 +2,10 @@
 .dialogs__item{
     display: inline-flex;
     align-items: center;
-    padding: 10px;
+    padding: 10px 16px;
     width: 100%;
+    cursor: pointer;
+    transition: all .3s ease;
     $item: &;
     &-avatar{
         display: flex;
@@ -75,7 +77,6 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    letter-spacing: -2px;
                     color:#fff;
                     font-weight: 700;
                     line-height: 13px;
@@ -88,5 +89,10 @@
                 }
             }
         }
+    }
+
+    &.active,
+    &:hover{
+        background:#F3F7FF;
     }
 }
