@@ -3,17 +3,22 @@ import classNames from 'classnames'
 
 import Date from '../Date/Date'
 
-
 import {ReadedIndicator} from '../ReadedIndicator'
 
 import './DialogsItem.scss'
 import Avatar from '../Avatar';
 
-const DialogsItem = ({id, userName, avatar,date, messageText, counter, isMe, isOnline}) => {
+
+const DialogsItem = ({id, userName, avatar,date, messageText, counter, isMe, isOnline, onDialogSelect}) => {
+
+
     return (
-        <li className = {classNames('dialogs__item', {
-            'dialogs__item--online' : isOnline
-        })}>
+        <li
+            className = {classNames('dialogs__item', {
+                'dialogs__item--online' : isOnline
+            })}
+            onClick = {() => onDialogSelect(id)}
+        >
             <div className = 'dialogs__item-avatar'>
                 <Avatar id ={id} userName = {userName} avatar = {avatar}/>
             </div>

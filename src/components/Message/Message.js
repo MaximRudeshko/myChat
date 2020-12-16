@@ -6,18 +6,23 @@ import PropTypes from 'prop-types'
 
 import { ReadedIndicator } from '../ReadedIndicator';
 import Date from '../Date/Date';
+import Avatar from '../Avatar'
 
 import play from '../../assets/img/play.svg'
 import pause from '../../assets/img/pause.svg'
 import wave from '../../assets/img/wave.svg'
-
-import './message.scss'
 import convertTime from '../../utils/convertTime';
 
+import './message.scss'
 
 
 
-const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, audio}) => {
+
+
+
+const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, audio, id, user}) => {
+    
+
 
     const [isPlaying, setPlaying] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
@@ -56,7 +61,7 @@ const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, aud
         })
 
 
-    } )
+    }, [])
     
     return (
         <div className = {classNames( 'message', {
@@ -67,7 +72,7 @@ const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, aud
         })}>
             <div className = 'message__wrapper'>              
                 <div className = 'message__avatar'>
-                    <img src = {avatar} alt = {`avatar ${avatar}`}/>
+                    <Avatar  avatar = {avatar} id = {id} userName = {user.fullname} />
                 </div>
                 <div className = 'message__content'>
                     <div className = 'message__top'>
@@ -129,7 +134,7 @@ const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, aud
 Message.propTypes = {
     avatar: PropTypes.string,
     text: PropTypes.string,
-    date: PropTypes.object,
+    date: PropTypes.string,
     isMe: PropTypes.bool,
     isReaded: PropTypes.bool,
     attachments: PropTypes.arrayOf(PropTypes.object),

@@ -7,6 +7,8 @@ import store from './redux/store'
 
 import App from './App';
 
+window.store = store // for test actions
+
 ReactDOM.render(
   <Provider store = {store}>
     <Router>

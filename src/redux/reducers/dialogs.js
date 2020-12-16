@@ -1,5 +1,6 @@
 const initialState = {
     dialogs: [],
+    currentDialog:null,
     loading:false
 }
 
@@ -9,6 +10,11 @@ const dialogs = (state = initialState, action) => {
             return {
                 ...state,
                 dialogs: action.payload
+            }
+        case 'SET_CURRENT_DIALOG':
+            return {
+                ...state,
+                currentDialog: action.payload
             }
         case 'SET_LOADING':
             return{

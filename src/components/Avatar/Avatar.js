@@ -15,6 +15,7 @@ const Avatar = ({avatar, id, userName}) => {
     }else{
         const {color, colorLighten} = generateAvatarFromHash(id)
         const firstChar = userName[0]
+        console.log(color)
         return(
             <div 
                 className = 'avatar avatar--empty'

@@ -2,40 +2,31 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Button, Input} from 'antd'
 import { Scrollbars } from 'react-custom-scrollbars';
-
 import {TeamOutlined, FormOutlined, SearchOutlined, EllipsisOutlined} from '@ant-design/icons'
 import { Dialogs } from '../../Dialogs';
 import { ChatInput } from '../../ChatInput';
 import { Chat } from '../../Chat';
-import DialogsApi from '../../../services/dialogsApi';
+import {fetchDialogs} from '../../../redux/actions/dialogs';
 
 import './home.scss'
 
-import {fetchDialogs, setLoading} from '../../../redux/actions/dialogs';
 
-
-
-const Home = ({items}) => {
-
-    const api = new DialogsApi()
+const Home = () => {
 
     const dispatch = useDispatch()
     const {dialogs, loading} = useSelector(state => state.dialogs)
-
-    React.useEffect(() => {
-        dispatch(setLoading(true))
-        api.getDialogs()
-            .then(data => {
-                dispatch(fetchDialogs(data))
-            })
-    }, [])
-
+    const [items, setItems] = React.useState(null)
     
 
-    /* const onSearch = (e) => {
-        const filteredData = data.filter(user => user.userName.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
-        setFilteredData(filteredData)
-    } */
+    React.useEffect(() => {
+        dispatch(fetchDialogs())
+    }, [])
+
+    const onSearch = (e) => {
+        const filteredData = dialogs.filter(user => user.userName.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+        setItems(filteredData)
+    } 
+ 
 
     return (
         <div className = 'home'>
@@ -49,10 +40,12 @@ const Home = ({items}) => {
                         <Button  icon = {<FormOutlined style = {{fontSize: '20px'}} />}/>
                     </div>
                     <div className = 'home__sidebar-search'>
-                        <Input /* onChange = {e => onSearch(e)} */ size="large" placeholder="Поиск среди контактов" prefix={<SearchOutlined style = {{color: '#CBCBCB'}} />} />
+                        <Input onChange = {e => onSearch(e)} size="large" placeholder="Поиск среди контактов" prefix={<SearchOutlined style = {{color: '#CBCBCB'}} />} />
                     </div>
                     <Dialogs 
-                        items = {dialogs} loading = {loading}/>
+                        items = { items || dialogs}
+                        loading = {loading}
+                    />
                 </div>
                 <div className = 'home__dialog'>
                     <div className = 'home__dialog-header'>
