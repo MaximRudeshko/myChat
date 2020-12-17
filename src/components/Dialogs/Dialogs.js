@@ -9,7 +9,6 @@ import Loader from '../Loader/Loader';
 import { setCurrentDialog } from '../../redux/actions/dialogs';
 
 import './Dialogs.scss'
-import { fetchMessages, setCurrentMessages } from '../../redux/actions/messages';
 
 
 
@@ -18,7 +17,7 @@ const Dialogs = ({items, loading}) => {
     const dispatch = useDispatch()
     
     const onDialogSelect = userId => {
-        dispatch(fetchMessages(userId))
+        dispatch(setCurrentDialog(userId))
     }
 
     return (

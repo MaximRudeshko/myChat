@@ -1,10 +1,12 @@
 .home__dialog-input{
-    padding: 13px 35px 13px;
+    padding: 5px 35px 0px;
+    position: relative;
     svg{
         cursor:pointer
     }
-    span{
-        padding: 5px;
+    & > span{
+        height: 50px;
+        padding: 10px 15px;
     }
     button{
         border:none;
@@ -16,14 +18,32 @@
         
     }
     input{
-        font-size: 14px;
+        font-size: 14px;        
     }
     &-actions{
         width: 90px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        & > span{
+            display: flex;
+            align-items: center;
+        }
         
+    }
+
+    &-smiles{
+        position: absolute;
+        bottom:82%;
+        .emoji-group{
+            li{
+                margin: 5px;
+            }
+        }
+    }
+
+    .ant-input-prefix{
+        margin-right: 10px;
     }
     
 }

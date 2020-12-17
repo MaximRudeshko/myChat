@@ -17,7 +17,7 @@ export default class ChatApi{
     }
 
     getDialog = async id => {
-        return await this.getResources(`/messages?id=${id ? id : ''}`)
+        return await this.getResources(`/messages?dialog=${id ? id : ''}`)
     }
  
 }

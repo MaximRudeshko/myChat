@@ -16,17 +16,26 @@ const Home = () => {
     const dispatch = useDispatch()
     const {dialogs, loading} = useSelector(state => state.dialogs)
     const [items, setItems] = React.useState(null)
+    const scrollBarRef = React.useRef(null)
     
 
     React.useEffect(() => {
         dispatch(fetchDialogs())
     }, [])
 
+
+    React.useEffect(() => {
+        
+                
+    }, [] )
+
+    
+
     const onSearch = (e) => {
         const filteredData = dialogs.filter(user => user.userName.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
         setItems(filteredData)
     } 
- 
+    
 
     return (
         <div className = 'home'>
@@ -57,7 +66,9 @@ const Home = () => {
                             <Button  icon = {<EllipsisOutlined style = {{fontSize: '20px'}} />}/>
                         </div>
                     </div>
-                    <Scrollbars style={{  height: 'calc(100% - 130px)' }} autoHide>
+                    <Scrollbars
+                    ref = {scrollBarRef}
+                    style={{  height: 'calc(100% - 130px)' }} autoHide>
                         <Chat/>
                     </Scrollbars> 
                     <ChatInput/>      

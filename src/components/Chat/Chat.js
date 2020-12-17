@@ -10,12 +10,14 @@ const Chat = () => {
 
     const dispatch = useDispatch()
     const {messages, loading} = useSelector(state => state.messages)
+    const {currentDialog} = useSelector(state => state.dialogs)
+
+    React.useEffect(() => {
+        if(currentDialog){
+            dispatch(fetchMessages(currentDialog))
+        }
+    }, [currentDialog])
     
-
-
-   React.useEffect(() => {
-       
-   }, [])
 
     return (
         <div className = 'home__dialog-chat'> 
