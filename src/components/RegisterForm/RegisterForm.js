@@ -24,7 +24,7 @@ const RegisterForm = (props) => {
     const dispatch = useDispatch()
 
     const handleSubmit = () => {
-        dispatch(registration(values))
+        registration(values)    
     }
 
     return (

@@ -5,7 +5,7 @@ import Block from '../Block/Block';
 import { Link } from 'react-router-dom';
 import formikEnhancer from '../Hoc-helpers/withFormik';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions/user';
+import { auth, login } from '../../redux/actions/user';
 
 
 const LoginForm = (props) => {
@@ -23,8 +23,13 @@ const LoginForm = (props) => {
 
     const dispatch = useDispatch()
 
+    React.useEffect(() => {
+        dispatch(auth())
+    }, [])
+
     const handleSubmit = () => {
-        dispatch(login(...values))
+        dispatch(login(values))
+        console.log(values)
     }
 
     return (
@@ -37,16 +42,16 @@ const LoginForm = (props) => {
                 >
                 <Form.Item
                     hasFeedback
-                    validateStatus = {!touched.userName ? '' : errors.userName ? 'error' : 'success'}
+                    validateStatus = {!touched.email ? '' : errors.email ? 'error' : 'success'}
                 >
                     <Input 
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="Введите логин"
                     size= 'large'
-                    name = 'userName'
+                    name = 'email'
                     onChange = {handleChange}
                     onBlur = {handleBlur}
-                    value = {values.userName}
+                    value = {values.email}
                     />
                 </Form.Item>
                 <Form.Item
@@ -57,13 +62,16 @@ const LoginForm = (props) => {
                     type="password"
                     placeholder="Введите пароль"
                     size= 'large'
-                    
                     name = 'password'
+                    value = {values.password}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button onCLick = {handleSubmit} size = 'large' type="primary" htmlType="submit" className="login-form-button">
-                    <Link to = '/home'>Войти в аккаунт</Link>
+                    <Button onClick = {handleSubmit} size = 'large' type="primary" htmlType="submit" className="login-form-button">
+                    {/* <Link to = '/home'>Войти в аккаунт</Link> */}
+                    Войти в аккаунт
                     </Button>                   
                 </Form.Item>
                 <span><Link to = '/register' className = 'auth__reg'>Зарегистрироваться</Link></span>

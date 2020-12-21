@@ -1,5 +1,6 @@
 const initialState = {
-    user: null
+    user: null,
+    isAuth: false
 }
 
 const user = (state = initialState, action) => {
@@ -7,7 +8,14 @@ const user = (state = initialState, action) => {
         case 'SET_USER':
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
+                isAuth: true
+            }
+        case 'LOGOUT': 
+            return {
+                ...state,
+                user: null,
+                isAuth: false
             }
         default:
            return state
