@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 import Block from '../Block/Block'
 import { SuccessBlock } from '../SuccesBlock';
 import formikEnhancer from '../Hoc-helpers/withFormik';
+import { useDispatch } from 'react-redux';
+import { createUser, registration } from '../../redux/actions/user';
 
 const RegisterForm = (props) => {
     const {
@@ -12,14 +14,19 @@ const RegisterForm = (props) => {
         touched,
         errors,
         dirty,
-        isSubmitting,
         handleChange,
         handleBlur,
-        handleSubmit,
         isValid,
       } = props;     
 
     const [success, setSuccess] = useState(false)
+
+    const dispatch = useDispatch()
+
+    const handleSubmit = () => {
+        dispatch(registration(values))
+    }
+
     return (
         <section className = "auth">
             <h2 className = 'auth__title'>Регистрация</h2>
@@ -91,7 +98,7 @@ const RegisterForm = (props) => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button onClick = {() => setSuccess(true)} disabled={!(isValid && dirty)} size = 'large' type="primary" htmlType="submit" className="login-form-button">
+                    <Button onClick = {handleSubmit} disabled={!(isValid && dirty)} size = 'large' type="primary" htmlType="submit" className="login-form-button">
                         Зарегистрироваться
                     </Button>                   
                 </Form.Item>

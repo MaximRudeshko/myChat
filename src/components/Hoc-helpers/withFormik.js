@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
+import { createUser } from '../../redux/actions/user';
 
 
 const formikEnhancer = withFormik({
@@ -26,10 +27,10 @@ const formikEnhancer = withFormik({
             .required()
     }),
     handleSubmit: (values, { setSubmitting }) => {
-        setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
-        }, 1000);
+        
+    },
+    handleChange: (value) => {
+        console.log(value)
     },
     displayName: 'RegisterForm'
 });

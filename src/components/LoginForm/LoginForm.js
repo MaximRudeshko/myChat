@@ -4,6 +4,8 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Block from '../Block/Block';
 import { Link } from 'react-router-dom';
 import formikEnhancer from '../Hoc-helpers/withFormik';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/actions/user';
 
 
 const LoginForm = (props) => {
@@ -16,9 +18,14 @@ const LoginForm = (props) => {
         isSubmitting,
         handleChange,
         handleBlur,
-        handleSubmit,
         isValid
       } = props;
+
+    const dispatch = useDispatch()
+
+    const handleSubmit = () => {
+        dispatch(login(...values))
+    }
 
     return (
         <section className = "auth">
@@ -55,7 +62,7 @@ const LoginForm = (props) => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button size = 'large' type="primary" htmlType="submit" className="login-form-button">
+                    <Button onCLick = {handleSubmit} size = 'large' type="primary" htmlType="submit" className="login-form-button">
                     <Link to = '/home'>Войти в аккаунт</Link>
                     </Button>                   
                 </Form.Item>
