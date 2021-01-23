@@ -14,18 +14,13 @@ const LoginForm = (props) => {
         values,
         touched,
         errors,
-        dirty,
-        isSubmitting,
         handleChange,
         handleBlur,
-        isValid
       } = props;
 
     const dispatch = useDispatch()
 
-    React.useEffect(() => {
-        dispatch(auth())
-    }, [])
+   
 
     const handleSubmit = () => {
         dispatch(login(values))

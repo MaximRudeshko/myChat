@@ -1,8 +1,5 @@
-import ChatApi from "../../services/chatApi"
+import axios from 'axios'
 
-
-
-const api = new ChatApi()
 
 export const setCurrentMessages = (items) => {
     return {
@@ -18,10 +15,18 @@ export const setLoading = val => {
     }
 }
 
-export const fetchMessages = (userId) => dispatch => {
+
+export const sendMessage = (dialog, text, user) => async dispatch => {
+    try {
+        const res = await axios.post(`http://localhost:3050/api/messages/create`, {dialog, text, user})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const fetchMessages = dialogId => async dispatch => {
     dispatch(setLoading(true))
-    api.getDialog(userId)
-        .then(data => dispatch(setCurrentMessages(data)))
-        .catch(() => dispatch(setLoading(false)))
+    const res = await axios.get(`http://localhost:3050/api/messages/${dialogId}`)
+    dispatch(setCurrentMessages(res.data))
 }
 

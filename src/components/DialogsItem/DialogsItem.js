@@ -9,26 +9,30 @@ import './DialogsItem.scss'
 import Avatar from '../Avatar';
 
 
-const DialogsItem = ({id, userName, avatar,date, messageText, counter, isMe, isOnline, onDialogSelect}) => {
-
-
+const DialogsItem = ({_id, interlocutor, owner: {_id : id, userName}, avatar, lastMessage, lastMessageTime, counter, isMe, isOnline, onDialogSelect, currentUser}) => {
+    console.log(currentUser)
+    
     return (
         <li
             className = {classNames('dialogs__item', {
                 'dialogs__item--online' : isOnline
             })}
-            onClick = {() => onDialogSelect(id)}
+            onClick = {() => onDialogSelect(_id)}
         >
             <div className = 'dialogs__item-avatar'>
-                <Avatar id ={id} userName = {userName} avatar = {avatar}/>
+                <Avatar 
+                    id ={currentUser !== interlocutor._id ? interlocutor._id : id} 
+                    userName = {currentUser !== interlocutor._id ? interlocutor.userName : userName} 
+                   /*  avatar = {currentUser === interlocutor._id ? interlocutor._id : id} */
+                />
             </div>
             <div className = 'dialogs__item-info'>
                 <div className = 'dialogs__item-info-top'>
-                    <b>{userName}</b>
-                    <span><Date date = {date}/></span>
+                    <b>{currentUser !== interlocutor._id ? interlocutor.userName : userName}</b>
+                    <span><Date date = {lastMessageTime}/></span>
                 </div>
                 <div className = 'dialogs__item-info-bottom'>
-                    <p>{messageText}</p>
+                    <p>{lastMessage}</p>
                     <div className = 'dialogs__item-info-bottom-count'>
                         {
                             isMe ? 

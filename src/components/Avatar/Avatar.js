@@ -4,6 +4,7 @@ import generateAvatarFromHash from '../../utils/generateAvatar';
 import './Avatar.scss'
 
 const Avatar = ({avatar, id, userName}) => {
+    
     if(avatar){
         return(
             <img
@@ -13,15 +14,16 @@ const Avatar = ({avatar, id, userName}) => {
             />
         )
     }else{
-        const {color, colorLighten} = generateAvatarFromHash(id)
-        const firstChar = userName[0]
-        console.log(color)
+        const {color, colorLighten} = generateAvatarFromHash(id) 
+        const firstChar = userName[0] 
+        
         return(
             <div 
                 className = 'avatar avatar--empty'
-                style = {{background: `linear-gradient(135deg, ${color} 0%, ${colorLighten} 96.52%)`}}    
+                style = {{background: `linear-gradient(135deg, ${color} 0%, ${colorLighten} 96.52%)`}} 
             >{firstChar}</div>
-        )
+        ) 
+        
     }
 }
 

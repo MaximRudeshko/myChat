@@ -17,16 +17,18 @@ export const logOut = () => {
 
 export const registration = async (...values) => {
     try {
-        const response = await axios.post('http://localhost:3050/api/auth/registration', ...values)
-        console.log(response.data)
+        console.log(values)
+        const response = await axios.post('http://localhost:3050/api/user/registration', ...values)
+        
     } catch (error) {
         console.log(error)
     }
 }
 
 export const login = (...values) => async dispatch => {
+    console.log(values)
     try {
-        const response = await axios.post('http://localhost:3050/api/auth/login', ...values)
+        const response = await axios.post('http://localhost:3050/api/user/login', ...values)
         dispatch(setUser(response.data))
         localStorage.setItem('token', response.data.token)
     } catch (error) {
@@ -36,11 +38,11 @@ export const login = (...values) => async dispatch => {
 
 export const auth = () => async dispatch => {
     try {
-        const response = await axios.get('http://localhost:3050/api/auth/auth', {
+        const response = await axios.get('http://localhost:3050/api/user/auth', {
             headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
         })
         localStorage.setItem('token', response.data.token)
-        dispatch(setUser(response.data.user))
+        dispatch(setUser(response.data))
     } catch (error) {
         console.log(error)
     }

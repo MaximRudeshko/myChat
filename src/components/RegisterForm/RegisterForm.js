@@ -24,7 +24,8 @@ const RegisterForm = (props) => {
     const dispatch = useDispatch()
 
     const handleSubmit = () => {
-        registration(values)    
+        registration(values)
+        setSuccess(true)    
     }
 
     return (

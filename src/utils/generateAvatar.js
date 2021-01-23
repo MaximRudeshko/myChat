@@ -4,9 +4,10 @@ const getCorrectIndex = number => {
   return number > 255 ? 255 : number < 0 ? 0 : number;
 };
 
-const generateAvatarFromHash =  hash => {
+const generateAvatarFromHash = hash => {
+
   const [r, g, b] = hash
-    .substr(0, 3)
+    .substr(hash.length - 4, hash.length - 1)
     .split("")
     .map(char => getCorrectIndex(char.charCodeAt()));
 

@@ -14,20 +14,16 @@ import wave from '../../assets/img/wave.svg'
 import convertTime from '../../utils/convertTime';
 
 import './message.scss'
+import { useSelector } from 'react-redux';
 
-
-
-
-
-
-const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, audio, id, user}) => {
-    
-
+const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, audio, _id, user: {userName, _id: userId}}) => {
 
     const [isPlaying, setPlaying] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const [progress, setProgress] = useState(0)
 
+    const currentUser = useSelector(({user}) => user.user.user._id)
+    console.log(currentUser)
 
     const togglePlaying = () => {
         if (!isPlaying) {
@@ -65,14 +61,14 @@ const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, aud
     
     return (
         <div className = {classNames( 'message', {
-            'message--isme': isMe,
+            'message--isme': userId === currentUser,
             'message--image': attachments && attachments.length === 1,
             'message--typing': isTyping,
             'message--audio': audio
         })}>
             <div className = 'message__wrapper'>              
                 <div className = 'message__avatar'>
-                    <Avatar  avatar = {avatar} id = {id} userName = {user.fullname} />
+                    <Avatar avatar = {avatar} id = {userId} userName = {userName} />  
                 </div>
                 <div className = 'message__content'>
                     <div className = 'message__top'>
@@ -118,7 +114,7 @@ const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, aud
                                 </div> 
                             }
                         </div>
-                        <ReadedIndicator isMe = {isMe} isTyping = {isTyping} isReaded = {isReaded}/>
+                        <ReadedIndicator isMe = {userId === currentUser} isTyping = {isTyping} isReaded = {isReaded}/>
                     </div>
                     {date && 
                         <div className = 'message__date'>

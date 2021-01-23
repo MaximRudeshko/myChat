@@ -1,37 +1,54 @@
-const { default: DialogsApi } = require("../../services/chatApi");
+import axios from 'axios'
 
-const api = new DialogsApi()
+
 
 export const setLoading = value => {
     return{
-        type: 'SET_LOADING',
+        type: 'DIALOGS:SET_LOADING',
         payload: value
+    }
+}
+
+const setError = () => {
+    return{
+        type:'DIALOGS:SET_ERROR'
     }
 }
 
 export const setCurrentDialog = userId => {
     return{
-        type: 'SET_CURRENT_DIALOG',
+        type: 'DIALOGS:SET_CURRENT_DIALOG',
         payload: userId
     }
 }
 
-export const setDialogs = items =>  {
+const setDialogs = items =>  {
     return{
-        type: 'SET_DIALOGS',
+        type: 'DIALOGS:SET_DIALOGS',
         payload: items
     }
 }
 
 
-export const fetchDialogs = () => dispatch => {
-    dispatch(setLoading(true))
-    api.getAllDialogs()
-        .then(data => {
-            dispatch(setDialogs(data))
-            dispatch(setLoading(false))
-        })
+export const fetchDialogs = user => async dispatch => {
+    try {
+        dispatch(setLoading(true))
+        const res = await axios.get(`http://localhost:3050/api/dialogs/${user}`)
+        dispatch(setDialogs(res.data))
+    } catch (error) {
+        console.log(error)
+        dispatch(setError())
+    }
 }
 
+
+export const createDialog = (owner, interlocutor) => async dispatch => {
+    try {
+        const res = await axios.post('http://localhost:3050/api/dialogs/create', {owner, interlocutor, text: 'HELLO MUTHERFUCKER!!!'})
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 

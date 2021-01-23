@@ -5,22 +5,22 @@ import Picker, { SKIN_TONE_MEDIUM_DARK } from 'emoji-picker-react';
 
 
 import './ChatInput.scss'
+import { useSelector, useDispatch } from 'react-redux';
+import { sendMessage } from '../../redux/actions/messages';
+import socket from '../../socket/socket';
 
 
-const InputActions = () => {
+const InputActions = ({messageText}) => {
+    const dispatch = useDispatch()
 
+   
 
-    const changeInputHandler = info => {
-        if (info.file.status !== "uploading") {
-            console.log(info.file, info.fileList);
-        }
-        if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-        }
+    const {currentDialog} = useSelector(state => state.dialogs)
+    const currentUser = useSelector(({user}) => user.user.user._id)
+
+    const sendMessageHandler = () => {
+        dispatch(sendMessage(currentDialog, messageText, currentUser))
     }
-
 
     return (
         <div className = 'home__dialog-input-actions'>
@@ -30,7 +30,7 @@ const InputActions = () => {
                 <Button icon = {<CameraOutlined style = {{fontSize: '20px'}} />}/>
             </Upload>
             <Button icon = {<AudioOutlined style = {{fontSize: '20px'}} />}/>
-            <Button icon = {<SendOutlined style = {{fontSize: '20px'}} />}/>
+            <Button icon = {<SendOutlined onClick = {() => sendMessageHandler()} style = {{fontSize: '20px'}} />}/>
         </div>
     )
 }
@@ -38,7 +38,8 @@ const InputActions = () => {
 const ChatInput = () => {
 
     const [smilesVisible, setSmilesVisible] = React.useState(false)
-
+    const [messageText, setMessageText] = React.useState('')
+    
     const clickSmileHandler = () => {
         if(smilesVisible){
             setSmilesVisible(false)
@@ -59,7 +60,17 @@ const ChatInput = () => {
                         />
                 </div>
             }
-            <Input size = 'large' prefix = {<Button onClick = {clickSmileHandler} icon = {<SmileOutlined style = {{fontSize: '20px'}} />}/>} suffix = {<InputActions/>} placeholder="Введите текст сообщения…" />
+            <Input
+                size = 'large' 
+                prefix = {<Button onClick = {clickSmileHandler} 
+                icon = {<SmileOutlined style = {{fontSize: '20px'}} />}/>} 
+                suffix = {<InputActions 
+                    messageText = {messageText}
+                    />} 
+                placeholder="Введите текст сообщения…" 
+                value = {messageText}
+                onChange = {e => setMessageText(e.target.value)}
+            />
         </div>
     );
 }
