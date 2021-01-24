@@ -5,13 +5,12 @@ import { Empty, Input } from 'antd';
 import {SearchOutlined} from '@ant-design/icons'
 
 
-
+import socket from '../../socket/socket';
 import DialogsItem from '../DialogsItem/DialogsItem'
 import Loader from '../Loader/Loader';
-import { fetchDialogs, setCurrentDialog } from '../../redux/actions/dialogs';
+import { fetchDialogs, setCurrentDialog, updateLastMessage } from '../../redux/actions/dialogs';
 
 import './Dialogs.scss'
-
 
 
 const Dialogs = () => {
@@ -21,11 +20,15 @@ const Dialogs = () => {
     const {user} = useSelector(state => state.user.user)
     const {dialogs, loading} = useSelector(state => state.dialogs)
     const [items, setFilteredData] = React.useState(null)
-    console.log(user)
-
+    
     React.useEffect(() => {
         dispatch(fetchDialogs(user._id))
-        console.log()
+    }, [])
+
+    React.useEffect(() => {
+        socket.on('NEW_MESSAGE', msg => {
+            dispatch(updateLastMessage(msg))
+        })
     }, [])
     
     const onDialogSelect = (id) => {
@@ -48,7 +51,6 @@ const Dialogs = () => {
                     :dialogs.length > 0 ?
                         orderBy(items || dialogs, ['date'], ['desc'])
                         .map(item => {
-                            console.log(item)
                             return <DialogsItem
                                     key = {item._id} 
                                     {...item}

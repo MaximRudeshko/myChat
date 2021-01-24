@@ -29,6 +29,13 @@ const setDialogs = items =>  {
     }
 }
 
+export const updateLastMessage = text => {
+    return{
+        type: 'DIALOGS:UPDATE_LAST_MESSAGE',
+        payload: text
+    }
+}
+
 
 export const fetchDialogs = user => async dispatch => {
     try {

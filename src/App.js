@@ -5,7 +5,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import Auth from './components/Pages/auth/Auth';
 import Home from './components/Pages/home/Home';
 import { auth } from './redux/actions/user';
-import socket from './socket/socket';
+
 
 import './styles/index.scss';
 
@@ -17,8 +17,6 @@ function App() {
 
   React.useEffect(() => {
     dispatch(auth())
-    socket.emit('TEST', 'TEST')
-    socket.on('FETCH_DIALOGS', (data) => console.log(data))
   },[])
 
   return (
@@ -31,7 +29,7 @@ function App() {
           </Switch>
           :
           <Switch>
-            <Route exact path="/home" render={() => <Home/>} />
+            <Route exact path="/home" component={Home} />
             <Redirect to = '/home'/>
           </Switch>
       }     

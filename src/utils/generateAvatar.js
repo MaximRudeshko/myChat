@@ -5,7 +5,7 @@ const getCorrectIndex = number => {
 };
 
 const generateAvatarFromHash = hash => {
-
+  
   const [r, g, b] = hash
     .substr(hash.length - 4, hash.length - 1)
     .split("")

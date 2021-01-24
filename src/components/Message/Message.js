@@ -23,7 +23,6 @@ const Message = ({avatar, text, date, isMe, isReaded, attachments, isTyping, aud
     const [progress, setProgress] = useState(0)
 
     const currentUser = useSelector(({user}) => user.user.user._id)
-    console.log(currentUser)
 
     const togglePlaying = () => {
         if (!isPlaying) {

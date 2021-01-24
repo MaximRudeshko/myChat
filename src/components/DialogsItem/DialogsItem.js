@@ -9,9 +9,7 @@ import './DialogsItem.scss'
 import Avatar from '../Avatar';
 
 
-const DialogsItem = ({_id, interlocutor, owner: {_id : id, userName}, avatar, lastMessage, lastMessageTime, counter, isMe, isOnline, onDialogSelect, currentUser}) => {
-    console.log(currentUser)
-    
+const DialogsItem = ({_id, interlocutor, owner: {_id : id, userName}, avatar, lastMessage, lastMessageTime, counter, isMe, isOnline, onDialogSelect, currentUser}) => {   
     return (
         <li
             className = {classNames('dialogs__item', {

@@ -15,6 +15,13 @@ export const setLoading = val => {
     }
 }
 
+export const addMessage = msg => {
+    return{
+        type: 'MESSAGES:ADD_MESSAGE',
+        payload: msg
+    }
+}
+
 
 export const sendMessage = (dialog, text, user) => async dispatch => {
     try {

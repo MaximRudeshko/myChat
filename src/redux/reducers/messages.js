@@ -16,6 +16,11 @@ const messages = (state = initialState, action) => {
                 ...state,
                 loading: action.payload
             }
+        case 'MESSAGES:ADD_MESSAGE': 
+            return {
+                ...state,
+                messages: [...state.messages, action.payload]
+            }
         default:
             return state
     }

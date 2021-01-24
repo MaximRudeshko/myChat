@@ -28,6 +28,20 @@ const dialogs = (state = initialState, action) => {
                 ...state,
                 error: true
             }
+        case 'DIALOGS:UPDATE_LAST_MESSAGE':
+            const dialogIndex = state.dialogs.findIndex(dialog => dialog._id === action.payload.dialog)
+            
+            const newDialog = {
+                ...state.dialogs[dialogIndex],
+                lastMessage: action.payload.text
+            }
+
+            const newDialogs = [...state.dialogs.slice(0, dialogIndex), newDialog, ...state.dialogs.slice(dialogIndex + 1)]
+
+            return{
+                ...state,
+                dialogs: newDialogs
+            }
         default:
             return state
     }
